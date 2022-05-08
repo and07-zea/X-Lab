@@ -90,14 +90,16 @@ void main(void) {
         
         if (valor_ASCII == '2'){                                    // 2) Enviar ASCII        
             modo = 1;                                               // Cambio de modo 
-            imprimir("\r Ingrese un caracter para mostrar en ASCII");
+            imprimir("\r Ingrese un valor para mostrar en ASCII dos veces\r");
                 
             while (PIR1bits.RCIF == 0);                             // Esperar
                 PORTB = RX;                                         // Pasar el valor al puerto A
                 imprimir(RX);                                       // Mostrar el caracter en LED
                 imprimir("\r Listo \r");
-                valor_ASCII = 0;                                    // Clear ASCII
-                break;
+                i = 0;                                                  // Imprimir el menu
+                modo = 0;                                               // Modo 1
+            break;
+            valor_ASCII = 0;                                    // Clear ASCII
         }
     }
     return;
@@ -151,10 +153,6 @@ void setup(void){
     PIE1bits.RCIE = 1;                                              // Habilitamos interrupciones de recepci?n
     
 }
-
-/* ---------------------------------------------------------------------------         
- *  FUNCIONES
- ---------------------------------------------------------------------------*/
 
 void obtener_valor(uint8_t valor){
     mensaje[0] = valor/100;                                         // Centenas
